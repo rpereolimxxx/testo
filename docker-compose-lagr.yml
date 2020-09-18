@@ -1,0 +1,35 @@
+version: "3"
+networks:
+  fineract-cn:
+    driver: bridge   
+services:
+  activemq:
+    image: harbor.infotec.mx/mifosio/com.mx.infotec.fineract.cn.infra.messaging.activemq.pruebas
+    container_name: activemq
+    restart: always
+    networks:
+      - fineract-cn
+    ports:
+      - "1414:61616"
+      - "61617:61617"
+      - "8161:8161"
+    environment:
+#      TZ: "America/Mexico_City"
+      ACTIVEMQ_OPTS: "-Xms4g -Xmx8g"
+      ACTIVEMQ_CONFIG_PENDINGMESSAGELIMIT: 1000
+      ACTIVEMQ_CONFIG_MAXCONNECTION: 700  
+      ACTIVEMQ_CONFIG_FRAMESIZE: 1000000
+      ACTIVEMQ_CONFIG_AUTHENABLED: "true" 
+      ACTIVEMQ_CONFIG_STORAGEUSAGE: 100 gb
+      ACTIVEMQ_CONFIG_TEMPUSAGE: 50 gb  
+      ACTIVEMQ_CONFIG_MINMEMORY: 2048
+      ACTIVEMQ_CONFIG_MAXMEMORY: 2048
+      ACTIVEMQ_STATIC_TOPICS: static-topic-1;static-topic-2
+      ACTIVEMQ_STATIC_QUEUES: static-queue-1;static-queue-2
+    healthcheck:
+      test: curl -u admin:admin -s http://localhost:8161/admin || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5 
+    volumes:
+      - /opt/activemq/data:/opt/activemq/data 
