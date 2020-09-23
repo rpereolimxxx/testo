@@ -4,7 +4,7 @@ networks:
     driver: bridge   
 services:
   activemq:
-    image: pru.harbor.infotec.mx/pruebas/com.mx.infotec.fineract.cn.infra.messaging.activemq.pruebas
+    image: http://207.249.109.39/pruebas/com.mx.infotec.fineract.cn.infra.messaging.activemq.pruebas
     container_name: activemq
     restart: always
     networks:
