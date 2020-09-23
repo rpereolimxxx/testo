@@ -4,7 +4,8 @@ networks:
     driver: bridge   
 services:
   activemq:
-          #    container_name: activemq
+    image: pru.harbor.infotec.mx/pruebas/com.mx.infotec.fineract.cn.infra.messaging.activemq.preproduccion
+    container_name: activemq
     restart: always
     networks:
       - fineract-cn
