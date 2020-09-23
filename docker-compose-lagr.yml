@@ -4,7 +4,7 @@ networks:
     driver: bridge   
 services:
   activemq:
-    container_name: activemq
+          #    container_name: activemq
     restart: always
     networks:
       - fineract-cn
